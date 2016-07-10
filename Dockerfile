@@ -1,11 +1,11 @@
 FROM ubuntu:14.04
-MAINTAINER Khozzy <khozzy@gmail.com>
+MAINTAINER Prussia <prussia.hu@gmail.com>
 
 USER root
 
 ENV CHROME_DRIVER_VERSION 2.14
-ENV PYTHON_VERSION 2.7.10
-ENV PYTHON_PIP_VERSION 7.0.3
+ENV PYTHON_VERSION 2.7.12
+ENV PYTHON_PIP_VERSION 8.1.2
 ENV LANG C.UTF-8
 ENV DISPLAY :99
 ENV UID 1000
@@ -72,20 +72,10 @@ RUN set -x \
     -exec rm -rf '{}' + \
   && rm -rf /usr/src/python
 
-RUN pip install -I selenium==2.45.0 unittest-xml-reporting==1.12.0
+RUN pip install -I selenium==2.53.6 unittest-xml-reporting==2.1.0
 
-#==================
-# Xvfb + init scripts
-#==================
-ADD libs/xvfb_init /etc/init.d/xvfb
-RUN chmod a+x /etc/init.d/xvfb
-
-ADD libs/xvfb-daemon-run /usr/bin/xvfb-daemon-run
-RUN chmod a+x /usr/bin/xvfb-daemon-run
 
 #============================
 # Clean up
 #============================
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* ~/.config/google-chrome
-
-USER chrome
