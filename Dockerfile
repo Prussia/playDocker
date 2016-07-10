@@ -8,6 +8,8 @@ ENV LANG C.UTF-8
 ENV PYTHON_VERSION 2.7.12
 ENV PYTHON_PIP_VERSION 8.1.2
 
+RUN yum -y install wget
+
 #====================================
 # Scripts to run install python2
 #====================================
