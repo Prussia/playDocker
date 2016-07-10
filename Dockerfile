@@ -1,44 +1,59 @@
-FROM python:2.7
-# File Author
-# MAITAINER Prussia Hu
+FROM selenium/node-chrome:2.53.0
+MAINTAINER Prussia <prussia.hu@gmail.com>
 
 USER root
 
-ENV CHROME_DRIVER_VERSION 2.9
-ENV PYTHON_VERSION 2.7.12
+
 ENV LANG C.UTF-8
+ENV PYTHON_VERSION 2.7.12
+ENV PYTHON_PIP_VERSION 8.1.2
 
-#===============
-# Google Chrome
-#===============
-RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
-  && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list \
-  && apt-get update -qqy \
-  && apt-get -qqy install google-chrome-stable \
-  && rm /etc/apt/sources.list.d/google-chrome.list \
-  && rm -rf /var/lib/apt/lists/*
+#====================================
+# Scripts to run install python2
+#====================================
 
-#==================
-# Chrome webdriver
-#==================
-RUN wget --no-verbose -O /tmp/chromedriver_linux64.zip http://chromedriver.storage.googleapis.com/2.9/chromedriver_linux64.zip \
-  && rm -rf /opt/selenium/chromedriver \
-  && unzip /tmp/chromedriver_linux64.zip -d /opt/selenium \
-  && rm /tmp/chromedriver_linux64.zip \
-  && mv /opt/selenium/chromedriver /opt/selenium/chromedriver-2.9 \
-  && chmod 755 /opt/selenium/chromedriver-2.9 \
-  && ln -fs /opt/selenium/chromedriver-2.9 /usr/bin/chromedriver
+# remove several traces of debian python
+RUN apt-get purge -y python.*
+
+RUN set -ex \
+  && curl -fSL "https://www.python.org/ftp/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz" -o python.tar.xz \
+  && curl -fSL "https://www.python.org/ftp/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz.asc" -o python.tar.xz.asc \
+  && export GNUPGHOME="$(mktemp -d)" \
+  && gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$GPG_KEY" \
+  && gpg --batch --verify python.tar.xz.asc python.tar.xz \
+  && rm -r "$GNUPGHOME" python.tar.xz.asc \
+  && mkdir -p /usr/src/python \
+  && tar -xJC /usr/src/python --strip-components=1 -f python.tar.xz \
+  && rm python.tar.xz \
+  \
+  && cd /usr/src/python \
+  && ./configure \
+    --enable-shared \
+    --enable-unicode=ucs4 \
+  && make -j$(nproc) \
+  && make install \
+  && ldconfig \
+  && curl -fSL 'https://bootstrap.pypa.io/get-pip.py' | python2 \
+  && pip install --no-cache-dir --upgrade pip==$PYTHON_PIP_VERSION \
+  && [ "$(pip list | awk -F '[ ()]+' '$1 == "pip" { print $2; exit }')" = "$PYTHON_PIP_VERSION" ] \
+  && find /usr/local -depth \
+    \( \
+        \( -type d -a -name test -o -name tests \) \
+        -o \
+        \( -type f -a -name '*.pyc' -o -name '*.pyo' \) \
+    \) -exec rm -rf '{}' + \
+  && rm -rf /usr/src/python ~/.cache
+
+# install "virtualenv", since the vast majority of users of this image will want it
+RUN pip install --no-cache-dir virtualenv
 
 
+#====================================
+# Scripts to run Selenium Standalone
+#====================================
+COPY entry_point.sh /opt/bin/entry_point.sh
+RUN chmod +x /opt/bin/entry_point.sh
 
-RUN pip install -I selenium==2.53.6 unittest-xml-reporting==2.1.0
+USER seluser
 
-
-
-#============================
-# Clean up
-#============================
-RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* ~/.config/google-chrome
-
-
-
+EXPOSE 4444
