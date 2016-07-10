@@ -1,6 +1,6 @@
 FROM ubuntu
 # File Author
-MAITAINER Prussia Hu
+# MAITAINER Prussia Hu
 
 USER root
 
