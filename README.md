@@ -1,7 +1,8 @@
-# playDocker
-1.How to run tests inside container?
+# playDocker 
+# https://hub.docker.com/r/prussia2016/selenium_python_chrome/
+1. How to run tests inside container?
 
- docker run --rm -v <path>:/tests prussia2016/selenium_python_chrome bash -c "export PYTHONPATH=.:/tests/$projectpath/src;pip install -r /tests/$projectpath/resource/req.txt;python /tests/$projectpath/<entry file>"
+   docker run --rm -v <path>:/tests prussia2016/selenium_python_chrome bash -c "export PYTHONPATH=.:/tests/$projectpath/src;pip install -r /tests/$projectpath/resource/req.txt;python /tests/$projectpath/<entry file>"
 
 2. grant user <user> to access docker
 
