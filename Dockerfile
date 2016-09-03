@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:14.04
 MAINTAINER Prussia <prussia.hu@gmail.com>
 
 USER root
@@ -10,7 +10,7 @@ RUN  echo "deb http://archive.ubuntu.com/ubuntu trusty main universe\n" > /etc/a
   && echo "deb http://archive.ubuntu.com/ubuntu trusty-updates main universe\n" >> /etc/apt/sources.list
 
 RUN apt-get update -qqy \
-  && apt-get -qqy install build-essential wget unzip curl xvfb xz-utils zlib1g-dev libssl-dev
+  && apt-get -qqy install build-essential wget unzip curl xz-utils zlib1g-dev libssl-dev
 
 # 
 #================================================
