@@ -3,27 +3,23 @@ MAINTAINER Prussia <prussia.hu@gmail.com>
 
 USER root
 
+ENV PYENV_ROOT /root/.pyenv
+ENV PATH /root/.pyenv/shims:/root/.pyenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$PATH
+
 #================================================
 # Customize sources for apt-get
 #================================================
 
 RUN apt-get update -qqy \
-  && apt-get -qqy install build-essential wget unzip curl xz-utils zlib1g-dev libssl-dev
+  && apt-get -qqy install \
+  git mercurial build-essential libssl-dev libbz2-dev libreadline-dev libsqlite3-dev curl
 
-# 
 #================================================
-# Install Oracle JDK v8
+# Install pyenv
 #================================================
-RUN \
-  apt-get update 1>/dev/null && \
-  apt-get install -y --no-install-recommends software-properties-common && \
-  echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
-  add-apt-repository -y ppa:webupd8team/java && \
-  apt-get update 1>/dev/null && \
-  apt-get install -y --no-install-recommends oracle-java8-installer && \
-  rm -rf /var/lib/apt/lists/* && \
-  rm -rf /var/cache/oracle-jdk8-installer
 
+RUN apt-get update && \
+    curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
 
 
 #============================
@@ -32,9 +28,5 @@ RUN \
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* ~/.config/
 
 WORKDIR /data
-
-# Define commonly used JAVA_HOME variable
-ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
-
 
 CMD ["bash"]
