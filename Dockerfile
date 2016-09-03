@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 MAINTAINER Prussia <prussia.hu@gmail.com>
 
 USER root
@@ -6,8 +6,6 @@ USER root
 #================================================
 # Customize sources for apt-get
 #================================================
-RUN  echo "deb http://archive.ubuntu.com/ubuntu trusty main universe\n" > /etc/apt/sources.list \
-  && echo "deb http://archive.ubuntu.com/ubuntu trusty-updates main universe\n" >> /etc/apt/sources.list
 
 RUN apt-get update -qqy \
   && apt-get -qqy install build-essential wget unzip curl xz-utils zlib1g-dev libssl-dev
