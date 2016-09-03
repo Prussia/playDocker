@@ -18,8 +18,7 @@ RUN apt-get update -qqy \
 # Install pyenv
 #================================================
 
-RUN apt-get update && \
-    curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
+RUN curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
 
 
 #============================
