@@ -8,7 +8,7 @@ USER root
 #================================================
 
 RUN apt-get update -qqy \
-  && apt-get -qqy install build-essential wget unzip curl xz-utils zlib1g-dev libssl-dev
+  && apt-get -qqy install build-essential wget unzip curl xz-utils zlib1g-dev libssl-dev xclip
 
 # 
 #================================================
