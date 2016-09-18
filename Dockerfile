@@ -43,8 +43,7 @@ RUN  wget -q https://archive.apache.org/dist/tomcat/tomcat-${TOMCAT_MAJOR_VERSIO
     wget -qO- https://archive.apache.org/dist/tomcat/tomcat-${TOMCAT_MAJOR_VERSION}/v${TOMCAT_MINOR_VERSION}/bin/apache-tomcat-${TOMCAT_MINOR_VERSION}.tar.gz.md5 | md5sum -c - && \
     tar zxf apache-tomcat-*.tar.gz && \
     rm apache-tomcat-*.tar.gz && \
-    mv apache-tomcat*/* $CATALINA_HOME \
-    rm apache-tomcat*
+    mv apache-tomcat*/* $CATALINA_HOME 
 
 RUN $CATALINA_HOME/bin/catalina.sh run
 
