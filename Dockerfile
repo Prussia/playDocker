@@ -21,6 +21,7 @@ RUN \
   add-apt-repository -y ppa:webupd8team/java && \
   apt-get update 1>/dev/null && \
   apt-get install -y --no-install-recommends oracle-java8-installer && \
+  rm -rf /var/lib/apt/lists/* && \
   rm -rf /var/cache/oracle-jdk8-installer
 
 # Define commonly used JAVA_HOME variable
