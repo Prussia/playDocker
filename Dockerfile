@@ -24,36 +24,37 @@ RUN \
   add-apt-repository -y ppa:webupd8team/java && \
   apt-get update 1>/dev/null && \
   apt-get install -y --no-install-recommends oracle-java8-installer && \
-  rm -rf /var/lib/apt/lists/* && \
   rm -rf /var/cache/oracle-jdk8-installer
 
+# Define commonly used JAVA_HOME variable
+ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
 
-#================================================
-# Apache Ant
-#================================================
+#====================================================================================
+# tomcat 8
+#====================================================================================
 
-# Download and extract apache ant to opt folder
-RUN wget --no-check-certificate --no-cookies http://archive.apache.org/dist/ant/binaries/apache-ant-${ANT_VERSION}-bin.tar.gz \
-    && wget --no-check-certificate --no-cookies http://archive.apache.org/dist/ant/binaries/apache-ant-${ANT_VERSION}-bin.tar.gz.md5 \
-    && echo "$(cat apache-ant-${ANT_VERSION}-bin.tar.gz.md5) apache-ant-${ANT_VERSION}-bin.tar.gz" | md5sum -c \
-    && tar -zvxf apache-ant-${ANT_VERSION}-bin.tar.gz -C /opt/ \
-    && ln -s /opt/apache-ant-${ANT_VERSION} /opt/ant \
-    && rm -f apache-ant-${ANT_VERSION}-bin.tar.gz \
-    && rm -f apache-ant-${ANT_VERSION}-bin.tar.gz.md5
+ENV TOMCAT_MAJOR_VERSION 8
+ENV TOMCAT_MINOR_VERSION 8.0.36
+ENV CATALINA_HOME /usr/local/tomcat
+#ENV JAVA_OPTS "-Dfile.encoding=UTF-8 -Xms512m -Xmx512m -XX:MaxPermSize=256m"
 
-# add executables to path
-RUN update-alternatives --install "/usr/bin/ant" "ant" "/opt/ant/bin/ant" 1 && \
-    update-alternatives --set "ant" "/opt/ant/bin/ant" 
+RUN mkdir -p /usr/local/tomcat/
+
+# INSTALL TOMCAT
+RUN  wget -q https://archive.apache.org/dist/tomcat/tomcat-${TOMCAT_MAJOR_VERSION}/v${TOMCAT_MINOR_VERSION}/bin/apache-tomcat-${TOMCAT_MINOR_VERSION}.tar.gz && \
+    wget -qO- https://archive.apache.org/dist/tomcat/tomcat-${TOMCAT_MAJOR_VERSION}/v${TOMCAT_MINOR_VERSION}/bin/apache-tomcat-${TOMCAT_MINOR_VERSION}.tar.gz.md5 | md5sum -c - && \
+    tar zxf apache-tomcat-*.tar.gz && \
+    rm apache-tomcat-*.tar.gz && \
+    mv apache-tomcat*/* $CATALINA_HOME \
+    rm apache-tomcat*
+
+RUN $CATALINA_HOME/bin/catalina.sh run
 
 #============================
 # Clean up
 #============================
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* ~/.config/
 
-WORKDIR /root
-
-# Define commonly used JAVA_HOME variable
-ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
-
-
-CMD ["bash"]
+WORKDIR $CATALINA_HOME
+EXPOSE 8080
+CMD [“catalina.sh", "run"]
