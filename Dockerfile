@@ -2,9 +2,6 @@ FROM ubuntu:16.04
 MAINTAINER Prussia <prussia.hu@gmail.com>
 
 USER root
-#=========================
-ENV ANT_VERSION=1.9.7
-ENV ANT_HOME=/opt/ant
 
 #================================================
 # Customize sources for apt-get
