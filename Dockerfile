@@ -45,8 +45,6 @@ RUN  wget -q https://archive.apache.org/dist/tomcat/tomcat-${TOMCAT_MAJOR_VERSIO
     rm apache-tomcat-*.tar.gz && \
     mv apache-tomcat*/* $CATALINA_HOME 
 
-RUN $CATALINA_HOME/bin/catalina.sh run
-
 #============================
 # Clean up
 #============================
