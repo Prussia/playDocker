@@ -29,6 +29,7 @@
 7. start docker daemon
    
    sudo systemctl start docker
-8. 
+8. changes
 
 9.
+ 
