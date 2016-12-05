@@ -1,3 +1,3 @@
 FROM elasticsearch
 MAINTAINER Prussia <prussia.hu@gmail.com>
-RUN plugin -i elasticsearch/license/latest && plugin -i elasticsearch/shield/latest && plugin -i elasticsearch/marvel/latest
+RUN plugin install elasticsearch/license/latest && plugin install elasticsearch/shield/latest && plugin install elasticsearch/marvel/latest
