@@ -1,3 +1,3 @@
-FROM elasticsearch:1.7.6
+FROM elasticsearch:2.4
 MAINTAINER Prussia <prussia.hu@gmail.com>
-RUN plugin -i elasticsearch/marvel/latest
+RUN plugin install elasticsearch/marvel/latest
