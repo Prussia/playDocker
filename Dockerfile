@@ -5,3 +5,4 @@ RUN plugin -i elastic/license/latest
 RUN plugin -i elastic/kibana/latest
 RUN plugin -i elastic/shield/latest 
 RUN plugin -i elastic/marvel/latest
+
