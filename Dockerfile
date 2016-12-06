@@ -5,4 +5,3 @@ RUN plugin install elasticsearch/license/latest
 RUN plugin install elasticsearch/shield/latest
 RUN plugin install elasticsearch/marvel/latest
 
-
