@@ -7,3 +7,4 @@ RUN plugin install elasticsearch/marvel/latest
 
 #RUN plugin install elasticsearch/shield/latest 
 
+
