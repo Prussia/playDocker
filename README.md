@@ -1,6 +1,7 @@
 # elasticsearch 1.7.6
 
- 
+ **[Docker Build](https://docs.docker.com/engine/reference/commandline/build/)**
+ docker build -t prussia/elasticsearch:1.7
            
 1. [Docker Introduction](https://github.com/Prussia/docker-cheat-sheet#containers)
 2. grant user <user> to access docker
