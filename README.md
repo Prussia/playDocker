@@ -1,9 +1,8 @@
-# playDocker 
-# https://hub.docker.com/r/prussia2016/selenium_python_chrome/
-1. How to run tests inside container?
+# elasticsearch 1.7.6
 
-   docker run --rm -v <path>:/tests prussia2016/selenium_python_chrome bash -c "export PYTHONPATH=.:/tests/$projectpath/src;pip install -r /tests/$projectpath/resource/req.txt;python /tests/$projectpath/<entry file>"
-
+ 
+           
+1. [Docker Introduction](https://github.com/Prussia/docker-cheat-sheet#containers)
 2. grant user <user> to access docker
 
    usermod -a -G docker <user>
