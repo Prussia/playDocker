@@ -20,4 +20,5 @@ do
   mount --bind /mnt/cryptfs/${DIR_NAME} /$DIR_NAME 
 done
 
-service docker.io start
+# Start the docker daemon.
+sudo service docker start

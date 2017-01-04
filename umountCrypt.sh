@@ -3,7 +3,7 @@
 CRYPTFS_ROOT=/cryptfs
 LOOP_DEVICE=$(losetup -a | grep $CRYPTFS_ROOT | grep -oP "^[^:]*")
 
-service docker.io stop
+sudo service docker stop
 
 
 for DIR_NAME in home var/lib/docker; do
