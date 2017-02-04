@@ -1,5 +1,28 @@
 FROM openjdk:8-jre
 
+#############################################
+CRYPTFS_ROOT=/cryptfs
+
+apt-get update
+apt-get -y upgrade
+apt-get -y install cryptsetup
+
+mkdir -p $CRYPTFS_ROOT
+dd if=/dev/zero of=$CRYPTFS_ROOT/swap bs=1M count=2048
+truncate -s 20G $CRYPTFS_ROOT/disk
+chmod -R 700 "$CRYPTFS_ROOT"
+
+LOOP_DEVICE=$(losetup -f)
+losetup $LOOP_DEVICE $CRYPTFS_ROOT/disk
+badblocks -s -w -t random -v $LOOP_DEVICE
+cryptsetup -y luksFormat $LOOP_DEVICE
+cryptsetup luksOpen $LOOP_DEVICE cryptfs
+mkfs.ext4 /dev/mapper/cryptfs
+mkdir -p /mnt/cryptfs
+mount /dev/mapper/cryptfs /mnt/cryptfs
+
+#############################################
+
 # grab gosu for easy step-down from root
 ENV GOSU_VERSION 1.7
 RUN set -x \
