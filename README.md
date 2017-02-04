@@ -1,6 +1,8 @@
 # playDocker 
 # https://www.cyberciti.biz/hardware/howto-linux-hard-disk-encryption-with-luks-cryptsetup-command/
 # https://docs.docker.com/engine/reference/run/#/runtime-privilege-and-linux-capabilities
+###docker run --name elasticsearch -d --privileged -p 9200:9200 -p 9300:9300 prussia2016/playdocker:elasticsearch
+
 1. [Runtime privilege and Linux capabilities](https://docs.docker.com/engine/reference/run/#/runtime-privilege-and-linux-capabilities)
 
 2. grant user <user> to access docker
