@@ -1,8 +1,7 @@
 # playDocker 
 # https://www.cyberciti.biz/hardware/howto-linux-hard-disk-encryption-with-luks-cryptsetup-command/
-1. How to run tests inside container?
-
-   docker run --rm -v <path>:/tests prussia2016/selenium_python_chrome bash -c "export PYTHONPATH=.:/tests/$projectpath/src;pip install -r /tests/$projectpath/resource/req.txt;python /tests/$projectpath/<entry file>"
+# https://docs.docker.com/engine/reference/run/#/runtime-privilege-and-linux-capabilities
+1. [Runtime privilege and Linux capabilities](https://docs.docker.com/engine/reference/run/#/runtime-privilege-and-linux-capabilities)
 
 2. grant user <user> to access docker
 
@@ -18,7 +17,7 @@
 
 5. do exec in docker container and run shell in it
    
-   docker exec -it <container>
+   docker exec -it <container> bash
 
 6. show all docker process
    
