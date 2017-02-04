@@ -3,9 +3,9 @@ FROM openjdk:8-jre
 #############################################
 RUN CRYPTFS_ROOT=/cryptfs
 
-RUN apt-get update \
-	&& apt-get -y upgrade \
-	&& apt-get -y install cryptsetup
+RUN apt-get update 
+RUN apt-get -y upgrade 
+RUN apt-get -y install cryptsetup
 
 RUN	mkdir -p $CRYPTFS_ROOT \
 	&& dd if=/dev/zero of=$CRYPTFS_ROOT/swap bs=1M count=2048 \
