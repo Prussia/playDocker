@@ -1,5 +1,5 @@
 # playDocker 
-# https://hub.docker.com/r/prussia2016/selenium_python_chrome/
+# https://www.cyberciti.biz/hardware/howto-linux-hard-disk-encryption-with-luks-cryptsetup-command/
 1. How to run tests inside container?
 
    docker run --rm -v <path>:/tests prussia2016/selenium_python_chrome bash -c "export PYTHONPATH=.:/tests/$projectpath/src;pip install -r /tests/$projectpath/resource/req.txt;python /tests/$projectpath/<entry file>"
