@@ -11,11 +11,11 @@
 	7. Backup the encryption key and the LUKS hearder
 
 ###[Runtime privilege and Linux capabilities](https://docs.docker.com/engine/reference/run/#/runtime-privilege-and-linux-capabilities)
-   ```
-   --privileged=false: Give extended privileges to this container
-   
-   --device=[]: Allows you to run devices inside the container without the --privileged flag.
-   ```
+```
+--privileged=false: Give extended privileges to this container
+
+--device=[]: Allows you to run devices inside the container without the --privileged flag.
+```
 ###docker run --name elasticsearch -d --privileged -p 9200:9200 -p 9300:9300 prussia2016/playdocker:elasticsearch
 
 1. [Runtime privilege and Linux capabilities](https://docs.docker.com/engine/reference/run/#/runtime-privilege-and-linux-capabilities)
