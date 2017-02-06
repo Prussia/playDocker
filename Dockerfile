@@ -12,13 +12,6 @@ RUN set -x \
 	&& chmod +x /usr/local/bin/gosu \
 	&& gosu nobody true
 
-# test disk encryption
-RUN set -ex \
-	&& apt-get update \
-	&& apt-get -y install cryptsetup
-
-# end test
-
 RUN set -ex; \
 # https://artifacts.elastic.co/GPG-KEY-elasticsearch
 	key='46095ACC8548582C1A2699A9D27D666CD88E42B4'; \
