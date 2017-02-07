@@ -63,14 +63,6 @@ COPY docker-entrypoint.sh /
 
 RUN chmod +x /docker-entrypoint.sh
 
-RUN plugin -i elasticsearch/license/1.0.0 && plugin -i elasticsearch/shield/1.3.3
-
-RUN /usr/share/elasticsearch/bin/shield/esusers useradd admin -p admin123 -r admin
-
-RUN mkdir ./config/shield
-
-RUN cp -rf /etc/elasticsearch/shield/* /usr/share/elasticsearch/config/shield
-
 EXPOSE 9200 9300
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["elasticsearch"]
