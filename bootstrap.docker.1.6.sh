@@ -11,7 +11,7 @@ apt-get -y install cryptsetup
 
 mkdir -p $CRYPTFS_ROOT
 dd if=/dev/zero of=$CRYPTFS_ROOT/swap bs=1M count=2048
-truncate -s 20G $CRYPTFS_ROOT/disk
+truncate -s 2G $CRYPTFS_ROOT/disk
 chmod -R 700 "$CRYPTFS_ROOT"
 
 LOOP_DEVICE=$(losetup -f)
