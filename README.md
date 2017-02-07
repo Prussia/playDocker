@@ -1,5 +1,6 @@
 # playDocker:elasticsearch
 ###[扫盲 dm-crypt——多功能 Linux 磁盘加密工具](https://linux.cn/thread-14738-1-1.html)
+###[EncryptedFilesystemHowto](https://help.ubuntu.com/community/EncryptedFilesystemHowto3)
 ###[HowTo: Linux Hard Disk Encryption With LUKS [ cryptsetup Command ]](https://www.cyberciti.biz/hardware/howto-linux-hard-disk-encryption-with-luks-cryptsetup-command/)
 	1. Check file system
 		a. Create a file on existing non-encrypted filesystem and use that as a block device by a loop device, if it is all one disk. The size depends on the estimation of data amount.
