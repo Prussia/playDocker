@@ -1,20 +1,4 @@
-FROM prussia2016/playdocker:jdk8
-
-
-RUN apt-get update && apt-get -y install cryptsetup
-
-RUN CRYPTFS_ROOT=/cryptfs && mkdir -p $CRYPTFS_ROOT
-RUN dd if=/dev/zero of=$CRYPTFS_ROOT/swap bs=1M count=2048 && truncate -s 2G $CRYPTFS_ROOT/disk
-RUN chmod -R 700 "$CRYPTFS_ROOT"
-
-RUN LOOP_DEVICE=$(losetup -f) && echo $LOOP_DEVICE
-RUN losetup $LOOP_DEVICE $CRYPTFS_ROOT/disk && badblocks -s -w -t random -v $LOOP_DEVICE
-RUN cryptsetup -y luksFormat $LOOP_DEVICE
-RUN cryptsetup luksOpen $LOOP_DEVICE cryptfs
-RUN mkfs.ext4 /dev/mapper/cryptfs
-RUN mkdir -p /mnt/cryptfs
-RUN mount /dev/mapper/cryptfs /mnt/cryptfs
-
+FROM openjdk:8-jre
 
 # grab gosu for easy step-down from root
 ENV GOSU_VERSION 1.7
@@ -78,6 +62,14 @@ VOLUME /usr/share/elasticsearch/data
 COPY docker-entrypoint.sh /
 
 RUN chmod +x /docker-entrypoint.sh
+
+RUN plugin -i elasticsearch/license/1.0.0 && plugin -i elasticsearch/shield/1.3.3
+
+RUN /usr/share/elasticsearch/bin/shield/esusers useradd admin -p admin123 -r admin
+
+RUN mkdir ./config/shield
+
+RUN cp -rf /etc/elasticsearch/shield/* /usr/share/elasticsearch/config/shield
 
 EXPOSE 9200 9300
 ENTRYPOINT ["/docker-entrypoint.sh"]
