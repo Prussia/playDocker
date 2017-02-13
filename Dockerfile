@@ -1,5 +1,21 @@
 FROM prussia2016/playdocker:jdk8
 
+
+RUN apt-get update && apt-get -y install cryptsetup
+
+RUN CRYPTFS_ROOT=/cryptfs && mkdir -p $CRYPTFS_ROOT
+RUN dd if=/dev/zero of=$CRYPTFS_ROOT/swap bs=1M count=2048 && truncate -s 2G $CRYPTFS_ROOT/disk
+RUN chmod -R 700 "$CRYPTFS_ROOT"
+
+RUN LOOP_DEVICE=$(losetup -f) && echo $LOOP_DEVICE
+RUN losetup $LOOP_DEVICE $CRYPTFS_ROOT/disk && badblocks -s -w -t random -v $LOOP_DEVICE
+RUN cryptsetup -y luksFormat $LOOP_DEVICE
+RUN cryptsetup luksOpen $LOOP_DEVICE cryptfs
+RUN mkfs.ext4 /dev/mapper/cryptfs
+RUN mkdir -p /mnt/cryptfs
+RUN mount /dev/mapper/cryptfs /mnt/cryptfs
+
+
 # grab gosu for easy step-down from root
 ENV GOSU_VERSION 1.7
 RUN set -x \
