@@ -1,5 +1,9 @@
 # playDocker 
 # https://hub.docker.com/r/prussia2016/selenium_python_chrome/
+###start docker listening to any ip address on your host, as well as the typical unix socket.
+'''
+sudo docker -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock -d &
+'''
 1. How to run tests inside container?
 
    docker run --rm -v <path>:/tests prussia2016/selenium_python_chrome bash -c "export PYTHONPATH=.:/tests/$projectpath/src;pip install -r /tests/$projectpath/resource/req.txt;python /tests/$projectpath/<entry file>"
