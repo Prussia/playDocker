@@ -20,6 +20,11 @@
 ```
 ###docker run --name elasticsearch -d --privileged -p 9200:9200 -p 9300:9300 prussia2016/playdocker:elasticsearch
 
+###start docker listening to any ip address on your host, as well as the typical unix socket.
+'''
+sudo docker -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock -d &
+'''
+
 1. [Runtime privilege and Linux capabilities](https://docs.docker.com/engine/reference/run/#/runtime-privilege-and-linux-capabilities)
 
 2. grant user <user> to access docker
