@@ -1,7 +1,8 @@
 # playDocker 
 ## [Engine CLI](https://docs.docker.com/engine/reference/commandline/docker/)
 ## [Daemon CLI reference(dockerd)](https://docs.docker.com/engine/reference/commandline/dockerd/)
-###start docker listening to any ip address on your host, as well as the typical unix socket.
+## [Configure and run Docker on various distributions](Configure and run Docker on various distributions)
+### start docker listening to any ip address on your host, as well as the typical unix socket.
 ```
 sudo docker -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock -d &
 ```
