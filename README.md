@@ -34,7 +34,7 @@ sudo docker -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock -d &
 5. do exec in docker container and run shell in it
 
    ```
-   docker exec -it <container>
+   docker exec -it <container> bash
    ```
 6. show all docker process
 
