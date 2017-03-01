@@ -6,6 +6,11 @@
 ```
 sudo docker -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock -d &
 ```
+### Event and State
+<p align="center">
+  <img src="./event_state.png" width="950"/>
+</p>
+
 1. How to run tests inside container?
 
    ```
