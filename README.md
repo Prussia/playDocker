@@ -50,3 +50,8 @@ sudo docker -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock -d &
    ```
    $ docker update --restart=on-failure:3 abebf7571666 hopeful_morse
    ```
+9. make sh executable
+   
+   '''
+   $ chmod +x *.sh
+   '''
