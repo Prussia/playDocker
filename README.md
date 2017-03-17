@@ -2,6 +2,7 @@
 ## [Engine CLI](https://docs.docker.com/engine/reference/commandline/docker/)
 ## [Daemon CLI reference(dockerd)](https://docs.docker.com/engine/reference/commandline/dockerd/)
 ## [Configure and run Docker on various distributions](https://docs.docker.com/engine/admin/#configuring-docker)
+## [(Nexus)Private Registry for Docker](https://books.sonatype.com/nexus-book/3.0/reference/docker.html)
 ### start docker listening to any ip address on your host, as well as the typical unix socket.
 ```
 sudo docker -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock -d &
