@@ -56,8 +56,9 @@ sudo docker -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock -d &
    $ docker ps -all
    ```
 7. start docker daemon 
-   [run Docker on CentOS / Red Hat Enterprise Linux / Fedora](https://docs.docker.com/engine/admin/#centos--red-hat-enterprise-linux--fedora)
 
+   [run Docker on CentOS / Red Hat Enterprise Linux / Fedora](https://docs.docker.com/engine/admin/#centos--red-hat-enterprise-linux--fedora)
+   [run Docker on Ubuntu](https://docs.docker.com/engine/admin/#ubuntu)
    ```
    $ sudo systemctl start docker
       # or on older distributions, you may need to use
