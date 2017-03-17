@@ -1,6 +1,7 @@
 # playDocker 
 ## [Engine CLI](https://docs.docker.com/engine/reference/commandline/docker/)
 ## [Daemon CLI reference(dockerd)](https://docs.docker.com/engine/reference/commandline/dockerd/)
+### [/etc/docker/daemon.json](https://docs.docker.com/engine/reference/commandline/dockerd//#daemon-configuration-file)
 ## [Configure and run Docker on various distributions](https://docs.docker.com/engine/admin/#configuring-docker)
 ## [(Nexus)Private Registry for Docker](https://books.sonatype.com/nexus-book/3.0/reference/docker.html)
 ## [Push Docker images on Private Repository](https://books.sonatype.com/nexus-book/3.0/reference/docker.html#docker-push)
