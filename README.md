@@ -4,7 +4,7 @@
 ## [Configure and run Docker on various distributions](https://docs.docker.com/engine/admin/#configuring-docker)
 ## [(Nexus)Private Registry for Docker](https://books.sonatype.com/nexus-book/3.0/reference/docker.html)
 ## [Push Docker images on Private Repository](https://books.sonatype.com/nexus-book/3.0/reference/docker.html#docker-push)
-
+## [How to use docker maven plugin(Chinese)](https://www.zybuluo.com/babydragon/note/352069)
 ### set your private docker registries
 Create or modify /etc/docker/daemon.json
 { "insecure-registries":["myregistry.example.com:5000"] }
