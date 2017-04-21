@@ -18,7 +18,7 @@ ExecStart=/usr/bin/dockerd -H fd:// -D --insecure-registry
 ### start docker listening to any ip address on your host, as well as the typical unix socket.
 ```
 sudo docker -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock -d &
-$ sudo dockerd -H unix:///var/run/docker.sock -H tcp://SWARM_MANAGER_IP
+$ sudo dockerd -H unix:///var/run/docker.sock -H tcp://SWARM_MANAGER_IP -d
 $ docker run -d -p 9000:9000 portainer/portainer -H tcp://SWARM_MANAGER_IP:2375
 ```
 
