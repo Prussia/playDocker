@@ -19,6 +19,13 @@ ExecStart=/usr/bin/dockerd -H fd:// -D --insecure-registry
 ```
 sudo docker -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock -d &
 ```
+
+### set docker remote api
+  https://docs.docker.com/edge/engine/reference/commandline/dockerd/#daemon-socket-option
+```
+# listen using the default unix socket, and on 2 specific IP addresses on this host.
+$ sudo dockerd -H unix:///var/run/docker.sock -H tcp://192.168.59.106 -H tcp://10.10.10.2
+```
 ### Event and State
 <p align="center">
   <img src="./event_state.png" width="950"/>
