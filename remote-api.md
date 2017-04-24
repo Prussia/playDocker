@@ -19,17 +19,3 @@ ps -ef | grep docker
 Look for the dockerd process and confirm that your -H settings are listed.
 
 Now, you should be able to hook up to the api: >docker -H :2375 info
-
-
-
-eliassalSalam Y. ELIASDec '16
-Hi, 
-Yes I followed instructions at the url sevral montrhs ago and I had a I think verion 1.2....
-I have upgraded to version 1.10.3 4 days ago using
-
-yum upgrade docker
-I checked usr/bin, no dockerd file, I have only
-
-docker Program
-docker-current Program
-docker-storage-setup Program
