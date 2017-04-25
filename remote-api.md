@@ -1,6 +1,11 @@
 # [How to Expose the Docker Remote API on Centos 7](https://forums.docker.com/t/expose-the-docker-remote-api-on-centos-7/26022)
 
-dockerd should be added to the standard /usr/bin path on CentOS 7. Check to see that it is there (ls /usr/bin/dockerd) - if it is, make sure your path settings are correct. If it's not, docker hasn't correctly installed and you might want to try again.
+dockerd should be added to the standard /usr/bin path on CentOS 7. 
+Check to see that it is there 
+```
+ls /usr/bin/dockerd
+```
+if it is, make sure your path settings are correct. If it's not, docker hasn't correctly installed and you might want to try again.
 
 Once you get that figured out, the command you list should expose the remote api. In CentOS 7, the init system is systemd, so you might want to create the following folder/file location with the desired docker exec command:
 ```
