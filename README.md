@@ -81,3 +81,8 @@ $ sudo dockerd -H unix:///var/run/docker.sock -H tcp://192.168.59.106 -H tcp://1
    ```
    $ docker update --restart=on-failure:3 abebf7571666 hopeful_morse
    ```
+9. present container name with status
+   ```
+   $ docker stats $(docker ps --format={{.Names}})
+   ```
+ 
