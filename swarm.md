@@ -19,3 +19,9 @@
   ```
 
 ### [Manager Node and Worker Node](https://docs.docker.com/engine/swarm/how-swarm-mode-works/nodes/)
+
+### [Create a swarm](https://docs.docker.com/engine/swarm/swarm-tutorial/create-swarm/)
+  Run the following command to create a new swarm:
+  ```
+  docker swarm init --advertise-addr <MANAGER-IP>
+  ```
