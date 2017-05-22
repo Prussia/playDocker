@@ -14,7 +14,7 @@
   $  firewall-cmd --add-port=7946/udp --permanent  
   $  firewall-cmd --add-port=4789/udp --permanent  
   $  firewall-cmd --reload  
-  $  sudo ystemctl restart docker  
+  $  sudo systemctl restart docker  
   $  firewall-cmd --list-all
   ```
 
