@@ -15,6 +15,7 @@
 
   docker update --cpu-shares 512 {contianer name}
   ```
+  
 3. 
    ```
    docker update --cpus="5" $(docker ps --format={{.Names}}) 
