@@ -9,14 +9,15 @@
   docker update --cpuset-cpus="" {contianer name}
   ```
 
-2. 
+2. Set the flag to a value grater or less than the default of 1024 to increase or reduce the container's weight, and give access to a greeater or lesser proportion of the host machine's CPU cycles. This is only enforced when CPU cycles are constrained. When plenty of CPU cycles are avalable, all containers use as much CPU as they need. 
   ```
   docker update --cpu-shares 1024 {contianer name}
 
   docker update --cpu-shares 512 {contianer name}
   ```
   
-3. 
+ 
+3. Specify how much of the avalable CPU resources a container can use.
    ```
    docker update --cpus="5" $(docker ps --format={{.Names}}) 
    ```
