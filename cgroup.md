@@ -21,3 +21,8 @@
    ```
    docker update --cpus="5" $(docker ps --format={{.Names}}) 
    ```
+4. top rate 500
+
+  ```
+  docker update --cpu-quota="500000" $(docker ps --format={{.Names}})
+  ```
