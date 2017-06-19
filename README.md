@@ -85,4 +85,8 @@ $ sudo dockerd -H unix:///var/run/docker.sock -H tcp://192.168.59.106 -H tcp://1
    ```
    $ docker stats $(docker ps --format={{.Names}})
    ```
+10. Configure Docker to start on boot
+   ```
+   $ sudo systemctl enable docker
+   ```
  
