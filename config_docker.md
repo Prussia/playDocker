@@ -1,13 +1,8 @@
 # Configure Docker Engine 
+## [Daemon CLI reference(dockerd)](https://docs.docker.com/engine/reference/commandline/dockerd/)
+### [/etc/docker/daemon.json](https://docs.docker.com/engine/reference/commandline/dockerd//#daemon-configuration-file)
 
-### set your private docker registries
-Create or modify /etc/docker/daemon.json
-{ "insecure-registries":["myregistry.example.com:5000"] }
-Restart docker daemon
-sudo service docker restart
-### Try adding --insecure-registry option to daemon in /etc/systemd/system/docker.service.d/docker.conf file.
-[Service]
-ExecStart=/usr/bin/dockerd -H fd:// -D --insecure-registry
+## [Configure and run Docker on various distributions](https://docs.docker.com/engine/admin/#configuring-docker)
 
 ### start docker listening to any ip address on your host, as well as the typical unix socket.
 ```
