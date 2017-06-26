@@ -31,7 +31,7 @@ ENV PATH $JAVA_HOME/bin:$PATH
 #================================================
 # Install Oracle JDK v8 JCE Policy
 #================================================
-apt-get -y -q install oracle-java8-unlimited-jce-policy
+RUN apt-get -y -q install oracle-java8-unlimited-jce-policy
 
 #====================================================================================
 # tomcat 8
