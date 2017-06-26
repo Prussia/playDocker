@@ -26,16 +26,17 @@ RUN \
 
 # Define commonly used JAVA_HOME variable
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
+ENV PATH $JAVA_HOME/bin:$PATH
 
 #====================================================================================
 # tomcat 8
 #====================================================================================
 
 ENV TOMCAT_MAJOR_VERSION 8
-ENV TOMCAT_MINOR_VERSION 8.0.37
+ENV TOMCAT_MINOR_VERSION 8.0.44
 ENV CATALINA_HOME /usr/local/tomcat
 
-ENV PATH $CATALINA_HOME/bin:$JAVA_HOME/bin:$PATH
+ENV PATH $CATALINA_HOME/bin:$PATH
 
 RUN mkdir -p /usr/local/tomcat/
 
