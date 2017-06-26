@@ -34,7 +34,8 @@ ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
 ENV TOMCAT_MAJOR_VERSION 8
 ENV TOMCAT_MINOR_VERSION 8.0.37
 ENV CATALINA_HOME /usr/local/tomcat
-#ENV JAVA_OPTS "-Dfile.encoding=UTF-8 -Xms512m -Xmx512m -XX:MaxPermSize=256m"
+
+ENV PATH $CATALINA_HOME/bin:$JAVA_HOME/bin:$PATH
 
 RUN mkdir -p /usr/local/tomcat/
 
