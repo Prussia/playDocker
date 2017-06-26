@@ -31,6 +31,7 @@ ENV PATH $JAVA_HOME/bin:$PATH
 #================================================
 # Install Oracle JDK v8 JCE Policy
 #================================================
+RUN apt-get update && apt-get install -y apt-transport-https
 RUN apt-get -y -q install oracle-java8-unlimited-jce-policy
 
 #====================================================================================
