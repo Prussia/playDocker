@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM tomcat:8.0-jre8
 MAINTAINER Prussia <prussia.hu@gmail.com>
 
 USER root
@@ -26,6 +26,7 @@ RUN \
 
 # Define commonly used JAVA_HOME variable
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
+ENV JRE_HOME /usr/lib/jvm/java-8-openjdk-amd64/jre
 ENV PATH $JAVA_HOME/bin:$PATH
 
 #================================================
@@ -33,25 +34,6 @@ ENV PATH $JAVA_HOME/bin:$PATH
 #================================================
 RUN apt-get update && apt-get install -y apt-transport-https
 RUN apt-get -y -q install oracle-java8-unlimited-jce-policy
-
-#====================================================================================
-# tomcat 8
-#====================================================================================
-
-ENV TOMCAT_MAJOR_VERSION 8
-ENV TOMCAT_MINOR_VERSION 8.0.44
-ENV CATALINA_HOME /usr/local/tomcat
-
-ENV PATH $CATALINA_HOME/bin:$PATH
-
-RUN mkdir -p /usr/local/tomcat/
-
-# INSTALL TOMCAT
-RUN  wget -q https://archive.apache.org/dist/tomcat/tomcat-${TOMCAT_MAJOR_VERSION}/v${TOMCAT_MINOR_VERSION}/bin/apache-tomcat-${TOMCAT_MINOR_VERSION}.tar.gz && \
-    wget -qO- https://archive.apache.org/dist/tomcat/tomcat-${TOMCAT_MAJOR_VERSION}/v${TOMCAT_MINOR_VERSION}/bin/apache-tomcat-${TOMCAT_MINOR_VERSION}.tar.gz.md5 | md5sum -c - && \
-    tar zxf apache-tomcat-*.tar.gz && \
-    rm apache-tomcat-*.tar.gz && \
-    mv apache-tomcat*/* $CATALINA_HOME 
 
 #============================
 # Clean up
