@@ -3,6 +3,10 @@ MAINTAINER Prussia <prussia.hu@gmail.com>
 
 USER root
 
+RUN apk update && \
+    apk add ca-certificates wget openssl && \
+    update-ca-certificates 
+
 #====================================================================================
 # tomcat 8
 #====================================================================================
@@ -21,17 +25,7 @@ RUN  wget -q https://archive.apache.org/dist/tomcat/tomcat-${TOMCAT_MAJOR_VERSIO
     tar zxf apache-tomcat-*.tar.gz && \
     rm apache-tomcat-*.tar.gz && \
     mv apache-tomcat*/* $CATALINA_HOME 
-
-#============================
-# visualvm
-#============================
-
-RUN apt-get -y -q install visualvm
-
-#============================
-# Clean up
-#============================
-RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* ~/.config/
+ 
 
 WORKDIR $CATALINA_HOME
 EXPOSE 8080
