@@ -9,22 +9,25 @@ USER root
 
 RUN apt-get update -qqy \
   && apt-get -qqy install build-essential wget unzip curl xz-utils zlib1g-dev libssl-dev
+RUN apt-get install -y apt-transport-https
 
-# 
 #================================================
 # Install Oracle JDK v8
 #================================================
 RUN \
   apt-get update 1>/dev/null && \
-  apt-get install -y --no-install-recommends software-properties-common && \
+  apt-get install -y --no-install-recommends software-properties-common 
+RUN \
   echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
-  add-apt-repository -y ppa:webupd8team/java && \
+  
+
+RUN \
   apt-get update 1>/dev/null && \
-  apt-get install -y --no-install-recommends oracle-java8-installer && \
+  apt-get install -y oracle-java8-set-default && \
   rm -rf /var/lib/apt/lists/* && \
   rm -rf /var/cache/oracle-jdk8-installer
 
-RUN apt-get install -y apt-transport-https
+
 RUN apt-get -y -q install oracle-java8-unlimited-jce-policy
 
 
