@@ -1,38 +1,50 @@
-FROM ubuntu:16.04
+FROM frolvlad/alpine-glibc:alpine-3.6
 MAINTAINER Prussia <prussia.hu@gmail.com>
 
 USER root
 
-#================================================
-# Customize sources for apt-get
-#================================================
+ENV JAVA_VERSION=8 \
+    JAVA_UPDATE=131 \
+    JAVA_BUILD=11 \
+    JAVA_PATH=d54c1d3a095b4ff2b6607d096fa80163 \
+    JAVA_HOME="/usr/lib/jvm/default-jvm"
 
-RUN apt-get update -qqy \
-  && apt-get -qqy install build-essential wget unzip curl xz-utils zlib1g-dev libssl-dev
-
-# 
-#================================================
-# Install Oracle JDK v8
-#================================================
-RUN \
-  apt-get update 1>/dev/null && \
-  apt-get install -y --no-install-recommends software-properties-common && \
-  echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
-  add-apt-repository -y ppa:webupd8team/java && \
-  apt-get update 1>/dev/null && \
-  apt-get install -y --no-install-recommends oracle-java8-installer && \
-  rm -rf /var/lib/apt/lists/* && \
-  rm -rf /var/cache/oracle-jdk8-installer
-
-#============================
-# Clean up
-#============================
-RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* ~/.config/
+RUN apk add --no-cache --virtual=build-dependencies wget ca-certificates unzip && \
+    cd "/tmp" && \
+    wget --header "Cookie: oraclelicense=accept-securebackup-cookie;" \
+        "http://download.oracle.com/otn-pub/java/jdk/${JAVA_VERSION}u${JAVA_UPDATE}-b${JAVA_BUILD}/${JAVA_PATH}/jdk-${JAVA_VERSION}u${JAVA_UPDATE}-linux-x64.tar.gz" && \
+    tar -xzf "jdk-${JAVA_VERSION}u${JAVA_UPDATE}-linux-x64.tar.gz" && \
+    mkdir -p "/usr/lib/jvm" && \
+    mv "/tmp/jdk1.${JAVA_VERSION}.0_${JAVA_UPDATE}" "/usr/lib/jvm/java-${JAVA_VERSION}-oracle" && \
+    ln -s "java-${JAVA_VERSION}-oracle" "$JAVA_HOME" && \
+    ln -s "$JAVA_HOME/bin/"* "/usr/bin/" && \
+    rm -rf "$JAVA_HOME/"*src.zip && \
+    rm -rf "$JAVA_HOME/lib/missioncontrol" \
+           "$JAVA_HOME/lib/visualvm" \
+           "$JAVA_HOME/lib/"*javafx* \
+           "$JAVA_HOME/jre/lib/plugin.jar" \
+           "$JAVA_HOME/jre/lib/ext/jfxrt.jar" \
+           "$JAVA_HOME/jre/bin/javaws" \
+           "$JAVA_HOME/jre/lib/javaws.jar" \
+           "$JAVA_HOME/jre/lib/desktop" \
+           "$JAVA_HOME/jre/plugin" \
+           "$JAVA_HOME/jre/lib/"deploy* \
+           "$JAVA_HOME/jre/lib/"*javafx* \
+           "$JAVA_HOME/jre/lib/"*jfx* \
+           "$JAVA_HOME/jre/lib/amd64/libdecora_sse.so" \
+           "$JAVA_HOME/jre/lib/amd64/"libprism_*.so \
+           "$JAVA_HOME/jre/lib/amd64/libfxplugins.so" \
+           "$JAVA_HOME/jre/lib/amd64/libglass.so" \
+           "$JAVA_HOME/jre/lib/amd64/libgstreamer-lite.so" \
+           "$JAVA_HOME/jre/lib/amd64/"libjavafx*.so \
+           "$JAVA_HOME/jre/lib/amd64/"libjfx*.so && \
+    wget --header "Cookie: oraclelicense=accept-securebackup-cookie;" \
+        "http://download.oracle.com/otn-pub/java/jce/${JAVA_VERSION}/jce_policy-${JAVA_VERSION}.zip" && \
+    unzip -jo -d "${JAVA_HOME}/jre/lib/security" "jce_policy-${JAVA_VERSION}.zip" && \
+    rm "${JAVA_HOME}/jre/lib/security/README.txt" && \
+    apk del build-dependencies && \
+    rm "/tmp/"*
 
 WORKDIR /root
-
-# Define commonly used JAVA_HOME variable
-ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
-
 
 CMD ["bash"]
