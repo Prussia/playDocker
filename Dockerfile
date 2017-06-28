@@ -1,4 +1,4 @@
-FROM buildpack-deps:jessie-curl
+FROM ubuntu:16.04
 MAINTAINER Prussia <prussia.hu@gmail.com>
 
 USER root
