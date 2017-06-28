@@ -1,4 +1,4 @@
-FROM prussia2016/playdocker:jdk8
+FROM frolvlad/alpine-oraclejdk8
 MAINTAINER Prussia <prussia.hu@gmail.com>
 
 USER root
