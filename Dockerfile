@@ -24,6 +24,10 @@ RUN \
   rm -rf /var/lib/apt/lists/* && \
   rm -rf /var/cache/oracle-jdk8-installer
 
+RUN apt-get install -y apt-transport-https
+RUN apt-get -y -q install oracle-java8-unlimited-jce-policy
+
+
 #============================
 # Clean up
 #============================
