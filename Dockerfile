@@ -1,4 +1,4 @@
-FROM openjdk:8-jdk
+FROM prussia2016/playdocker:jdk8
 
 ENV CATALINA_HOME /usr/local/tomcat
 ENV PATH $CATALINA_HOME/bin:$PATH
