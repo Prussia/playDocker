@@ -4,6 +4,10 @@ MAINTAINER Prussia <prussia.hu@gmail.com>
 USER root
 
 RUN  apt-get update  &&  apt-get install -qqy --no-install-recommends software-properties-common 
+
+#============================
+# JAVA 8
+#============================
 RUN \
   echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
   echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee /etc/apt/sources.list.d/webupd8team-java.list && \
@@ -15,6 +19,20 @@ RUN apt-get update && \
   rm -rf /var/lib/apt/lists/* && \
   rm -rf /var/cache/oracle-jdk8-installer
 
+#============================
+# JCE
+#============================
+RUN apt-get install -y apt-transport-https
+RUN apt-get -y -q install oracle-java8-unlimited-jce-policy
+
+#============================
+# Clean up
+#============================
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* ~/.config/
+
+#============================
+# Environment
+#============================
 WORKDIR /root
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
 
