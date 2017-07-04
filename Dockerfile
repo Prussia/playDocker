@@ -18,7 +18,7 @@ RUN apt-get update && \
   apt-get install -qqy  oracle-java8-set-default 
 
 RUN apt-get update && \
-  apt-get install -qqy apt-transport-https && \
+  # apt-get install -qqy apt-transport-https && \
   apt-get -qqy install oracle-java8-unlimited-jce-policy 
 
 RUN  rm -rf /var/lib/apt/lists/* && \
