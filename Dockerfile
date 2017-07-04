@@ -3,8 +3,6 @@ MAINTAINER Prussia <prussia.hu@gmail.com>
 
 USER root
 
-RUN  apt-get update  &&  apt-get install -qqy --no-install-recommends software-properties-common 
-
 #============================
 # JAVA 8 with JCE
 #============================
