@@ -15,12 +15,14 @@ RUN \
   apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886
   
 RUN apt-get update && \
-  apt-get install -qqy  oracle-java8-set-default && \
-  apt-get install -qqy apt-transport-https && \
-  apt-get -qqy install oracle-java8-unlimited-jce-policy && \
-  rm -rf /var/lib/apt/lists/* && \
-  rm -rf /var/cache/oracle-jdk8-installer
+  apt-get install -qqy  oracle-java8-set-default 
 
+RUN apt-get update && \
+  apt-get install -qqy apt-transport-https && \
+  apt-get -qqy install oracle-java8-unlimited-jce-policy 
+
+RUN  rm -rf /var/lib/apt/lists/* && \
+  rm -rf /var/cache/oracle-jdk8-installer
 
 #============================
 # Clean up
