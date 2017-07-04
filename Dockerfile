@@ -1,4 +1,4 @@
-FROM buildpack-deps:jessie-scm
+FROM buildpack-deps:jessie-curl
 MAINTAINER Prussia <prussia.hu@gmail.com>
 
 USER root
