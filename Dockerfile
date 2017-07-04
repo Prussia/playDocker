@@ -6,7 +6,7 @@ USER root
 RUN  apt-get update  &&  apt-get install -qqy --no-install-recommends software-properties-common 
 
 #============================
-# JAVA 8
+# JAVA 8 with JCE
 #============================
 RUN \
   echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
@@ -16,14 +16,11 @@ RUN \
   
 RUN apt-get update && \
   apt-get install -qqy  oracle-java8-set-default && \
+  apt-get install -qqy apt-transport-https && \
+  apt-get -qqy install oracle-java8-unlimited-jce-policy && \
   rm -rf /var/lib/apt/lists/* && \
   rm -rf /var/cache/oracle-jdk8-installer
 
-#============================
-# JCE
-#============================
-RUN apt-get install -y apt-transport-https
-RUN apt-get -y -q install oracle-java8-unlimited-jce-policy
 
 #============================
 # Clean up
