@@ -3,8 +3,12 @@ MAINTAINER Prussia <prussia.hu@gmail.com>
 
 USER root
 
-ENV PYENV_ROOT /root/.pyenv
-ENV PATH /root/.pyenv/shims:/root/.pyenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$PATH
+RUN groupadd -g 999 appuser && \
+    useradd -r -u 999 -g appuser appuser
+
+
+ENV PYENV_ROOT /home/appuser/.pyenv
+ENV PATH /home/appuser/.pyenv/shims:/home/appuser/.pyenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$PATH
 
 #================================================
 # Customize sources for apt-get
@@ -26,6 +30,8 @@ RUN curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/py
 #============================
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* ~/.config/
 
-WORKDIR /data
+WORKDIR /home/appuser/
+USER appuser
+
 
 CMD ["bash"]
